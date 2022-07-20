@@ -16,8 +16,8 @@ timeframe = pd.date_range(start='1-1-2016',
 
 eth = [cg.get_coin_history_by_id('ethereum', '-'.join(str(timeframe[i]).split(' ')[0].split('-')[::-1]))['market_data']['current_price']['usd'] for i in range(len(timeframe))]
 
-
-## find data source for real-time crypto data
+df = pd.DataFrame({'date': timeframe,
+                  'price': eth})
 
 ## get data into json format
 
