@@ -26,8 +26,11 @@ df.set_index('date', inplace=True)
 ## TODO: FUTURE:: Multivariate & NLP -> more data sources
 
 ## TODO: perform analysis of data (LSTM, ema cross, etc.)
-alpha = 0.167
-ema6 = ema_calculatoor(eth,alpha=alpha)
+alpha6 = np.divide(1.6)
+ema6 = ema_calculatoor(eth,alpha=alpha6)
+
+alpha9 = np.divide(1,9)
+ema9 = ema_calculatoor(eth,alpha=alpha9)
         
 
     
