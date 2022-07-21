@@ -19,11 +19,12 @@ eth = [cg.get_coin_history_by_id('ethereum', '-'.join(str(timeframe[i]).split(' 
 df = pd.DataFrame({'date': timeframe,
                   'price': eth})
 
-## get data into json format
+df.set_index('date', inplace=True)
 
-## TODO: Clean data
+## TODO: Multivariate & NLP -> more data sources
 
-## TODO: perform analysis of data
+## TODO: perform analysis of data (LSTM, ema cross, etc.)
+
 
 ## TODO: return decision
 
