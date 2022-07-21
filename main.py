@@ -4,6 +4,8 @@ import json
 import requests
 import pycoingecko as pygc
 
+from ema_calculator import ema_calculatoor
+
 ## TODO: Get data
 ## cg good for historical daily data
 cg = pygc.CoingGeckoAPI()
@@ -24,18 +26,9 @@ df.set_index('date', inplace=True)
 ## TODO: FUTURE:: Multivariate & NLP -> more data sources
 
 ## TODO: perform analysis of data (LSTM, ema cross, etc.)
-ema_6_init = eth[0]
-ema_9_init = eth[0]
-def ema6_calculatoor(coin_price_list, ema = 0.0, alpha = 0.167):
-    if ema == 0.0:
-        ema = coin_price_list.pop(0)
-        return ema6_calculatoor(coin_price_list, ema=ema)
-    else:
-        ema = ema + alpha * (coin_price_list.pop(0) - ema)
-        if len(coin_price_list) == 0:
-            return ema
-        else:
-            return ema6_calculatoor(coin_price_list, ema=ema)
+alpha = 0.167
+ema6 = ema_calculatoor(eth,alpha=alpha)
+        
 
     
 
