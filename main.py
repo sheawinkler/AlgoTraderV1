@@ -21,10 +21,22 @@ df = pd.DataFrame({'date': timeframe,
 
 df.set_index('date', inplace=True)
 
-## TODO: Multivariate & NLP -> more data sources
+## TODO: FUTURE:: Multivariate & NLP -> more data sources
 
 ## TODO: perform analysis of data (LSTM, ema cross, etc.)
+ema_6_init = eth[0]
+ema_9_init = eth[0]
+def ema6_calculatoor(coin_price_list, ema = 0, alpha = 0.167):
+    if len(coin_price_list) == 0:
+        return ema
+    if ema == 0:
+        ema = coin_price_list.pop(0)
+        ema6_calculatoor(coin_price_list, ema=ema)
+    else:
+        ema = ema + alpha(coin_price_list.pop(0) - ema)
+        ema6_calculatoor(coin_price_list, ema=ema)
 
+    
 
 ## TODO: return decision
 
