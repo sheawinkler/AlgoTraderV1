@@ -17,6 +17,8 @@ coinlist = ['ethereum']
 begin_date = '1-1-2016'
 end_date = '20-7-2022'
 freq = '4H'
+
+
 eth = get_CGcoin_data(begin_date,end_date,freq,'ethereum')
 
 df = pd.DataFrame({'date': timeframe,
@@ -33,27 +35,25 @@ ema6 = ema_calculatoor(eth,alpha=alpha6)
 alpha9 = np.divide(1,9)
 ema9 = ema_calculatoor(eth,alpha=alpha9)
 
-
-
 ## TODO: return decision    
 flag = 0
-
-init_avg = np.mean(ema6[0],ema9[0])
+longest_ema = 9
     
 for i,j in zip(ema6,ema9):
+    if longest_ema > 0:
+        longest_ema = longest_ema - 1
+        continue
     if i > j and flag == 0:
-        print('ema6 crosses ema9 - buy')
+        print('ema6 crosses above ema9 - buy')
         flag = 1
     if i > j and flag == 1:
         print('hold')
     if i < j and flag == 0:
-        print('ema9 crosses ema6 - sell')
+        print('ema6 crosses below ema9 - sell')
         flag == 1
     if i < j and flag == 0:
         print('patience is a virtue or you can yolo')
     
-
-
 
 ## TODO: test decision // Sum of decisions
 
