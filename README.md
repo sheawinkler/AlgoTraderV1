@@ -10,6 +10,7 @@
 
 ### decision analysis plan
 * Begin with EMA
+  * Final product will search for best alpha per coin using sklearn / testing
 * Explore ML and DL approaches
 * Incorporate NLP data from twitter and crypto news sources
   * incorporate general macro sentiment
