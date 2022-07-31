@@ -14,10 +14,9 @@ cg = pygc.CoingGeckoAPI()
 coinlist = ['ethereum']
 
 
-begin_date = '1-1-2016'
+begin_date = '1-1-2020'
 end_date = '20-7-2022'
 freq = '4H'
-
 
 eth = get_CGcoin_data(begin_date,end_date,freq,'ethereum')
 
@@ -37,25 +36,37 @@ ema9 = ema_calculatoor(eth,alpha=alpha9)
 
 ## TODO: return decision    
 flag = 0
+eth_idx = 0
 longest_ema = 9
 decisions = []
-    
+prices = []
+
 for i,j in zip(ema6,ema9):
+    
     if longest_ema > 0:
         longest_ema = longest_ema - 1
+        eth_idx += 1
         continue
     if i > j and flag == 0:
         print('ema6 crosses above ema9 - buy')
         decisions.append('Buy')
+        prices.append(eth[eth_idx])
+        eth_idx += 1
         flag = 1
+        continue
     if i > j and flag == 1:
-        print('hold')
+        eth_idx += 1
+        continue
+        # print('hold')
     if i < j and flag == 0:
         print('ema6 crosses below ema9 - sell')
         flag == 1
         decisions.append('Sell')
-    if i < j and flag == 0:
-        print('patience is a virtue or you can yolo')
+        eth_idx += 1
+        prices.append(eth[eth_idx])
+    if i < j and flag == 1:
+        continue
+        # print('wait')
     
 
 ## TODO: test decision // Sum of decisions
