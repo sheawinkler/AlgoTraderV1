@@ -9,16 +9,15 @@ from coingecko import get_CGcoin_data
 
 ## TODO: Get data
 ## cg good for historical daily data
-cg = pygc.CoingGeckoAPI()
 
 coinlist = ['ethereum']
 
 
-begin_date = '1-1-2020'
+begin_date = '19-7-2022'
 end_date = '20-7-2022'
 freq = '4H'
 
-eth = get_CGcoin_data(begin_date,end_date,freq,'ethereum')
+eth,timeframe = get_CGcoin_data(begin_date,end_date,freq,'ethereum')
 
 df = pd.DataFrame({'date': timeframe,
                   'price': eth})
@@ -68,7 +67,8 @@ for i,j in zip(ema6,ema9):
         continue
         # print('wait')
     
-
+print(decisions)
+print(prices)
 ## TODO: test decision // Sum of decisions
 ## TODO: logic: conservative_decison = if high_price_at_purchase > low_price_at_sell then true
 ## ## ## now only getting daily close price so will have to alter API call for functionality

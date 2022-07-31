@@ -1,6 +1,8 @@
 import pycoingecko as cg
 import pandas as pd
 
+cg = cg.CoinGeckoAPI()
+
 def get_CGcoin_data(begin_date, end_date, freq, coin):
     timeframe = pd.date_range(start=begin_date,
                        end=end_date, 
@@ -8,4 +10,4 @@ def get_CGcoin_data(begin_date, end_date, freq, coin):
     coin_data = [cg.get_coin_history_by_id(coin, 
                     '-'.join(str(timeframe[i]).split(' ')[0].split('-')[::-1]))['market_data']['current_price']['usd'] 
                  for i in range(len(timeframe))]
-    return coin_data
+    return coin_data,timeframe
