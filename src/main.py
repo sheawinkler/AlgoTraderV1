@@ -13,9 +13,9 @@ from coingecko import get_CGcoin_data
 coinlist = ['ethereum']
 
 
-begin_date = '19-7-2022'
-end_date = '20-7-2022'
-freq = '4H'
+begin_date = '13-7-2022'
+end_date = '22-7-2022'
+freq = '1D'
 
 eth,timeframe = get_CGcoin_data(begin_date,end_date,freq,'ethereum')
 
@@ -23,15 +23,18 @@ df = pd.DataFrame({'date': timeframe,
                   'price': eth})
 
 df.set_index('date', inplace=True)
+print(df.head())
 
 ## TODO: FUTURE:: Multivariate & NLP -> more data sources
 
 ## TODO: perform analysis of data (ema cross -> LSTM -> beyond, etc.)
+_eth = eth.copy()
 alpha6 = np.divide(1,6)
-ema6 = ema_calculatoor(eth,alpha=alpha6)
+ema6 = ema_calculatoor(_eth,alpha=alpha6)
 
+_eth = eth.copy()
 alpha9 = np.divide(1,9)
-ema9 = ema_calculatoor(eth,alpha=alpha9)
+ema9 = ema_calculatoor(_eth,alpha=alpha9)
 
 ## TODO: return decision    
 flag = 0
