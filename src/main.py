@@ -13,11 +13,15 @@ from coingecko import get_CGcoin_data
 coinlist = ['ethereum']
 
 
-begin_date = '13-7-2022'
+begin_date = '1-7-2022'
 end_date = '22-7-2022'
 freq = '1D'
 
 eth,timeframe = get_CGcoin_data(begin_date,end_date,freq,'ethereum')
+
+## TODO: 
+# ## need to do more with databases to store 
+# ## information about coins once retrieved and not try to retrieve again
 
 df = pd.DataFrame({'date': timeframe,
                   'price': eth})
@@ -36,6 +40,9 @@ _eth = eth.copy()
 alpha9 = np.divide(1,9)
 ema9 = ema_calculatoor(_eth,alpha=alpha9)
 
+#print(f'ema6: {ema6}')
+#print(f'ema9: {ema9}')
+
 ## TODO: return decision    
 flag = 0
 eth_idx = 0
@@ -45,10 +52,10 @@ prices = []
 
 for i,j in zip(ema6,ema9):
     
-    if longest_ema > 0:
-        longest_ema = longest_ema - 1
-        eth_idx += 1
-        continue
+    # if longest_ema > 0:
+    #     longest_ema = longest_ema - 1
+    #     eth_idx += 1
+    #     continue
     if i > j and flag == 0:
         print('ema6 crosses above ema9 - buy')
         decisions.append('Buy')
@@ -75,6 +82,7 @@ print(prices)
 ## TODO: test decision // Sum of decisions
 ## TODO: logic: conservative_decison = if high_price_at_purchase > low_price_at_sell then true
 ## ## ## now only getting daily close price so will have to alter API call for functionality
+## ## may need some kind of initial threshold to trigger a decision or just need lots more data than coingecko allows
 ## TODO: FIRST, let's make a decision model that can chart it's decisions
 
 
